@@ -1,9 +1,7 @@
 CREATE DATABASE reviews;
 
-USE reviews;
-
 CREATE TABLE reviews (
-    review_id INT AUTO_INCREMENT PRIMARY KEY,
+    review_id SERIAL PRIMARY KEY,
     product_id INT,
     rating INT,
     summary TEXT,
@@ -16,12 +14,10 @@ CREATE TABLE reviews (
 );
 
 CREATE TABLE review_photos (
-    review_id INT,
-    photo_id INT AUTO_INCREMENT PRIMARY KEY,
-    photo_url TEXT,
-    FOREIGN KEY (review_id) REFERENCES reviews(review_id)
+    photo_id SERIAL PRIMARY KEY,
+    review_id INT REFERENCES reviews(review_id),
+    photo_url TEXT
 );
-
 
 CREATE TABLE reviews_meta (
     product_id INT PRIMARY KEY,
@@ -35,16 +31,8 @@ CREATE TABLE reviews_meta (
 );
 
 CREATE TABLE characteristics (
-    product_id INT,
-    characteristic_id INT PRIMARY KEY,
+    characteristic_id SERIAL PRIMARY KEY,
+    product_id INT REFERENCES reviews_meta(product_id),
     characteristic_name VARCHAR(255),
-    characteristic_value FLOAT,
-    FOREIGN KEY (product_id) REFERENCES reviews_meta(product_id)
+    characteristic_value FLOAT
 );
-
-
-
-
-/*  Execute this file from the command line by typing:
- *    mysql -u root < server/schema.sql
- *  to create the database and the tables.*/

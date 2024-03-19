@@ -4,6 +4,18 @@ const mongoose = require('mongoose');
 // mongoose connection
 mongoose.connect('mongodb://localhost/reviews');
 
+mongoose.connection.on('connected', () => {
+  console.log('Mongoose connected to MongoDB');
+});
+
+mongoose.connection.on('error', (err) => {
+  console.error('Mongoose connection error:', err);
+});
+
+mongoose.connection.on('disconnected', () => {
+  console.log('Mongoose disconnected');
+});
+
 // mongoose schema
 
 const ReviewSchema = mongoose.Schema({
