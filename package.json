@@ -1,0 +1,26 @@
+{
+  "name": "reviews-vincent",
+  "version": "1.0.0",
+  "description": "reviews-vincent",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "server-dev": "nodemon server/ --watch"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Gucci-GUIs/Reviews-Vincent.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Gucci-GUIs/Reviews-Vincent/issues"
+  },
+  "homepage": "https://github.com/Gucci-GUIs/Reviews-Vincent#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.18.3",
+    "mongoose": "^8.2.2",
+    "nodemon": "^3.1.0"
+  }
+}
