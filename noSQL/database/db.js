@@ -1,10 +1,10 @@
-//require mongoose
+// require mongoose
 const mongoose = require('mongoose');
 
-//mongoose connection
-mongoose.connect('mongodb://localhost/reviews')
+// mongoose connection
+mongoose.connect('mongodb://localhost/reviews');
 
-//mongoose schema
+// mongoose schema
 
 const ReviewSchema = mongoose.Schema({
   product_id: Number,
@@ -19,37 +19,34 @@ const ReviewSchema = mongoose.Schema({
   helpfulness: Number,
   photos: [{
     id: Number,
-    url: String }]
-})
+    url: String,
+  }],
+});
 
-const ReviewsMeta = mongoose.Schema({
+const ReviewsMetaSchema = mongoose.Schema({
   product_id: Number,
   ratings: {
-      '1': Number,
-      '2': Number,
-      '3': Number,
-      '4': Number,
-      '5': Number
+    1: Number,
+    2: Number,
+    3: Number,
+    4: Number,
+    5: Number,
   },
   recommended: {
-      false: Number,
-      true: Number,
+    false: Number,
+    true: Number,
   },
   characteristics: [{
     name: String,
     id: Number,
-    value: Number
-  }]
-})
+    value: Number,
+  }],
+});
 
-
-//mongoose model
+// mongoose model
 const Review = mongoose.model('Review', ReviewSchema);
-const ProductData = mongoose.model('ReviewsMeta', ReviewsMetaSchema);
+const ReviewsMeta = mongoose.model('ReviewsMeta', ReviewsMetaSchema);
 
-
-
-//export
-module.exports.Review = Review
-module.exports.ReviewsMeta = ReviewsMeta
-
+// export
+module.exports.Review = Review;
+module.exports.ReviewsMeta = ReviewsMeta;
