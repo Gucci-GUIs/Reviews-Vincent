@@ -5,6 +5,7 @@ const connection = new Pool({
   user: process.env.POSTGRES_USER,
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
+  port: process.env.POSTGRES_PORT || 5432,
 
 });
 
@@ -13,8 +14,16 @@ connection.on('connect', () => {
 });
 
 connection.on('error', (err) => {
-  console.error('Error connecting to PostgreSQL database', err);
+  console.log('Error connecting to PostgreSQL database', err);
   process.exit(-1);
+});
+
+connection.query('SELECT * FROM reviews', (err, result) => {
+  if (err) {
+    console.error('Error executing query:', err);
+    process.exit(-1);
+  }
+  console.log('Query result:', result.rows);
 });
 
 module.exports = connection;
