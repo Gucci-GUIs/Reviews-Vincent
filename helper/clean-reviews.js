@@ -3,6 +3,7 @@ const createCsvStringifier = require('csv-writer').createObjectCsvStringifier;
 const fs = require('fs');
 const { Transform } = require('stream');
 
+
 // define the CSV stringifier for headers
 const csvStringifier = createCsvStringifier({
   header: [

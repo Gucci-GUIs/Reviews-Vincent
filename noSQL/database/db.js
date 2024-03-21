@@ -19,15 +19,17 @@ mongoose.connection.on('disconnected', () => {
 // mongoose schema
 
 const ReviewSchema = mongoose.Schema({
-  product_id: Number,
   review_id: Number,
+  product_id: Number,
   rating: Number,
-  summary: String,
-  recommend: Boolean,
-  response: String,
-  body: String,
   date: Date,
+  summary: String,
+  body: String,
+  recommend: Boolean,
+  reported: Boolean,
   reviewer_name: String,
+  reviewer_email: String,
+  response: String,
   helpfulness: Number,
   photos: [{
     id: Number,

@@ -1,5 +1,11 @@
 const { Pool } = require('pg');
 
+console.log(process.env.POSTGRES_HOST);
+console.log(process.env.POSTGRES_USER);
+console.log(process.env.POSTGRES_PASSWORD);
+console.log(process.env.POSTGRES_DB);
+console.log(process.env.POSTGRES_PORT);
+
 const connection = new Pool({
   host: process.env.POSTGRES_HOST,
   user: process.env.POSTGRES_USER,
@@ -12,19 +18,21 @@ const connection = new Pool({
 connection.on('connect', () => {
   console.log('Connected to PostgreSQL database');
 });
-
 connection.on('error', (err) => {
   console.log('Error connecting to PostgreSQL database', err);
   process.exit(-1);
 });
 
-connection.query('SELECT * FROM reviews', (err, result) => {
-  if (err) {
-    console.error('Error executing query:', err);
-    process.exit(-1);
-  }
-  console.log('Query result:', result.rows);
-});
+
+
+
+// connection.query('SELECT * FROM reviews', (err, result) => {
+//   if (err) {
+//     console.error('Error executing query:', err);
+//     process.exit(-1);
+//   }
+//   console.log('Query result:', result.rows);
+// });
 
 module.exports = connection;
 
