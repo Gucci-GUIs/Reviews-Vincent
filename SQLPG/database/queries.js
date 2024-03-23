@@ -74,7 +74,7 @@ function getMetaData(productId) {
     .then((results) => {
       // destructure results
       const [ratingCountsResult, recommendCountsResult, avgCharacteristicRatingResult] = results;
-      console.log(avgCharacteristicRatingResult.rows)
+      // console.log(avgCharacteristicRatingResult.rows)
       return {
         ratingCounts: ratingCountsResult.rows,
         recommendCounts: recommendCountsResult.rows,
@@ -125,7 +125,7 @@ function postReview(reviewData) {
           // need to handle characteristics_review insert
           // add with characteristic_id, review_id, and value
           const characteristicQueryValues = Object.entries(reviewData.characteristics).map(([characteristicId, value], index) => `($1, $${index * 2 + 2}, $${index * 2 + 3})`).join(', ');
-          console.log(characteristicQueryValues)
+          // console.log(characteristicQueryValues)
           const characteristicQuery = `
         INSERT INTO characteristics_reviews (review_id, characteristic_id, value)
         VALUES
@@ -138,7 +138,7 @@ function postReview(reviewData) {
             .flatMap(([characteristicId, value]) => [characteristicId, value]);
 
           const characteristicParams = [reviewId, ...characteristicsData];
-          console.log(characteristicParams);
+          // console.log(characteristicParams);
 
           // Execute the query to insert characteristics reviews
           return connection.query(characteristicQuery, characteristicParams);

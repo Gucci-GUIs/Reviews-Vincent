@@ -42,6 +42,21 @@ CREATE TABLE characteristics_reviews ( -- POST
 );
 
 
+-- CREATE INDEX idx_reviews_product_id
+-- ON reviews (product_id);
+
+-- CREATE INDEX idx_review_photos_review_id
+-- ON review_photos (review_id);
+
+-- CREATE INDEX idx_characteristics_reviews_review_id
+-- ON characteristics_reviews (review_id);
+
+-- CREATE INDEX idx_characteristics_reviews_characteristic_id
+-- ON characteristics_reviews (characteristic_id);
+
+-- CREATE INDEX idx_characteristics_product_id
+-- ON characteristics (product_id);
+
 
 
     -- product_id INT REFERENCES reviews_meta(product_id),

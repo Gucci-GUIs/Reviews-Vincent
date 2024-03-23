@@ -15,13 +15,13 @@ const connection = new Pool({
 
 });
 
-connection.on('connect', () => {
-  console.log('Connected to PostgreSQL database');
-});
-connection.on('error', (err) => {
-  console.log('Error connecting to PostgreSQL database', err);
-  process.exit(-1);
-});
+// connection.on('connect', () => {
+//   console.log('Connected to PostgreSQL database');
+// });
+// connection.on('error', (err) => {
+//   console.log('Error connecting to PostgreSQL database', err);
+//   process.exit(-1);
+// });
 
 
 
