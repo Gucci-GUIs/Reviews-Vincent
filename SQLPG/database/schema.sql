@@ -7,22 +7,22 @@ DROP TABLE IF EXISTS review_photos, characteristics_reviews, characteristics, re
 
 CREATE TABLE reviews (
     id SERIAL PRIMARY KEY,
-    product_id INT,
-    rating INT,
+    product_id INT, -- POST
+    rating INT, --GET, POST
     temp_date BIGINT,
-    date DATE,
-    summary TEXT,
-    body TEXT,
-    recommend BOOLEAN,
+    date TIMESTAMP DEFAULT CURRENT_TIMESTAMP, --GET
+    summary TEXT, --GET, POST
+    body TEXT, --GET, POST
+    recommend BOOLEAN, --GET, POST
     reported BOOLEAN,
-    reviewer_name TEXT,
-    reviewer_email TEXT,
-    response TEXT,
-    helpfulness INT
+    reviewer_name TEXT, --GET, POST
+    reviewer_email TEXT, -- POST
+    response TEXT, --GET
+    helpfulness INT --GET
 );
 
 
-CREATE TABLE review_photos (
+CREATE TABLE review_photos ( --GET -- POST
     id SERIAL PRIMARY KEY,
     review_id INT REFERENCES reviews(id),
     url TEXT
@@ -34,7 +34,7 @@ CREATE TABLE characteristics (
     name TEXT
 );
 
-CREATE TABLE characteristics_reviews (
+CREATE TABLE characteristics_reviews ( -- POST
     id SERIAL PRIMARY KEY,
     characteristic_id INT REFERENCES characteristics(id),
     review_id INT REFERENCES reviews(id),

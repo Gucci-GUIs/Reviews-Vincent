@@ -1,6 +1,7 @@
 require('dotenv').config();
 const express = require('express');
 const morgan = require('morgan');
+const router = require('./router.js');
 
 const db = require('../database/db.js');
 
@@ -13,3 +14,6 @@ app.listen(PORT, () => {
 
 app.use(express.json());
 app.use(morgan('dev'));
+
+
+app.use('/api', router);

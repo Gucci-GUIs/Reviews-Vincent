@@ -42,6 +42,19 @@ function loadReviews() {
       console.log('Review dates updated and temp_date column dropped.');
       console.timeEnd('Updating review dates');
     })
+    .then(() => {
+      // Get the maximum ID value from the reviews table
+      return pool.query('SELECT MAX(id) AS max_id FROM reviews');
+    })
+    .then((result) => {
+      const maxId = result.rows[0].max_id;
+      // Reset the sequence to start from the maximum ID value
+      return pool.query(`ALTER SEQUENCE reviews_id_seq RESTART WITH ${maxId + 1}`);
+    })
+    .then(() => {
+      console.log('Auto-increment of reviews ID field reset.');
+      // Additional processing or logging if needed
+    })
     .catch((err) => {
       console.error('Error loading reviews data:', err);
       throw err; // Propagate the error to the caller
@@ -56,6 +69,19 @@ function loadPhotos() {
     .then(() => {
       console.timeEnd('Loading review_photos');
       // console.log('Data loaded into photos table.');
+    })
+    .then(() => {
+      // Get the maximum ID value from the reviews table
+      return pool.query('SELECT MAX(id) AS max_id FROM review_photos');
+    })
+    .then((result) => {
+      const maxId = result.rows[0].max_id;
+      // Reset the sequence to start from the maximum ID value
+      return pool.query(`ALTER SEQUENCE review_photos_id_seq RESTART WITH ${maxId + 1}`);
+    })
+    .then(() => {
+      console.log('Auto-increment of photos ID field reset.');
+      // Additional processing or logging if needed
     })
     .catch((err) => {
       console.error('Error loading photos data:', err);
@@ -72,6 +98,19 @@ function loadCharacteristics() {
       console.timeEnd('Loading characteristics');
       // console.log('Data loaded into characteristics table.');
     })
+    .then(() => {
+      // Get the maximum ID value from the reviews table
+      return pool.query('SELECT MAX(id) AS max_id FROM characteristics');
+    })
+    .then((result) => {
+      const maxId = result.rows[0].max_id;
+      // Reset the sequence to start from the maximum ID value
+      return pool.query(`ALTER SEQUENCE characteristics_id_seq RESTART WITH ${maxId + 1}`);
+    })
+    .then(() => {
+      console.log('Auto-increment of characteristics ID field reset.');
+      // Additional processing or logging if needed
+    })
     .catch((err) => {
       console.error('Error loading characteristics data:', err);
       throw err; // Propagate the error to the caller
@@ -86,6 +125,19 @@ function loadCharacteristicReviews() {
     .then(() => {
       console.timeEnd('Loading characteristics_reviews');
       // console.log('Data loaded into characteristics_reviews table.');
+    })
+    .then(() => {
+      // Get the maximum ID value from the reviews table
+      return pool.query('SELECT MAX(id) AS max_id FROM characteristics_reviews');
+    })
+    .then((result) => {
+      const maxId = result.rows[0].max_id;
+      // Reset the sequence to start from the maximum ID value
+      return pool.query(`ALTER SEQUENCE characteristics_reviews_id_seq RESTART WITH ${maxId + 1}`);
+    })
+    .then(() => {
+      console.log('Auto-increment of char reviews ID field reset.');
+      // Additional processing or logging if needed
     })
     .catch((err) => {
       console.error('Error loading characteristics_reviews data:', err);
