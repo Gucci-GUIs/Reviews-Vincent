@@ -18,6 +18,7 @@ function getAllReviews(productId) {
   return connection.query(query, params)
     .then((result) => result.rows)
     .catch((error) => {
+      console.log('GET error: ', error);
       throw error;
     });
 }
