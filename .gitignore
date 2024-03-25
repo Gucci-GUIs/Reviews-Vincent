@@ -2,3 +2,5 @@
 node_modules/
 data/
 notes/
+reviewsDump.sql
+reviewsDump2.sql
