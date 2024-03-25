@@ -7,7 +7,7 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "server-dev-sql": "nodemon sql/server/ --watch",
     "server-dev-nosql": "nodemon nosql/server/ --watch",
-    "server-dev-sqlpg": "nodemon sqlpg/server/index.js --watch",
+    "server-dev-sqlpg": "nodemon SQLPG/server/ --watch",
     "lint": "eslint ."
   },
   "repository": {
