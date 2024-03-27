@@ -1,10 +1,14 @@
 const models = require('../database/queries.js');
+const { cache } = require('../Cache/cache.js');
 
 exports.getAllReviews = (req, res) => {
   // res.sendStatus(418);
   const { productId } = req.params;
   models.getAllReviews(productId)
-    .then((reviews) => res.json(reviews))
+    .then((reviews) => {
+      cache.set(req.originalUrl, reviews, 60);
+      res.json(reviews);
+    })
     .catch((err) => res.sendStatus(500));
 };
 
@@ -57,9 +61,9 @@ function formatMetaData(metadata) {
 
   metadata.avgCharacteristicRating.forEach((item) => {
     if (
-      item.characteristic_name !== undefined &&
-      item.characteristic_id !== undefined &&
-      item.avg_characteristic_rating !== undefined
+      item.characteristic_name !== undefined
+      && item.characteristic_id !== undefined
+      && item.avg_characteristic_rating !== undefined
     ) {
       formattedMetadata.characteristics[item.characteristic_name] = {
         id: item.characteristic_id,
@@ -76,6 +80,7 @@ exports.getMetaData = (req, res) => {
   models.getMetaData(productId)
     .then((metadata) => {
       const formattedMetadata = formatMetaData(metadata);
+      cache.set(req.originalUrl, formattedMetadata, 60);
       res.json(formattedMetadata);
     })
     .catch((error) => res.status(500).send(error.message));
