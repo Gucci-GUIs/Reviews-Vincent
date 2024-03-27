@@ -8,32 +8,67 @@ exports.getAllReviews = (req, res) => {
     .catch((err) => res.sendStatus(500));
 };
 
+// function formatMetaData(metadata) {
+//   // Initialize objects to store formatted data
+//   const ratings = {};
+//   const recommended = {};
+//   const characteristics = {};
+
+//   // Format rating counts
+//   metadata.ratingCounts.forEach((item) => {
+//     ratings[item.rating.toString()] = item.rating_count.toString();
+//   });
+
+//   // Format recommendation counts
+//   metadata.recommendCounts.forEach((item) => {
+//     recommended[item.recommend.toString()] = item.recommend_count.toString();
+//   });
+
+//   // Format characteristic ratings
+//   metadata.avgCharacteristicRating.forEach((item) => {
+//     characteristics[item.characteristic_name] = {
+//       id: item.characteristic_id,
+//       value: item.avg_characteristic_rating.toString()
+//     };
+//   });
+
+//   // Return the formatted data
+//   return { ratings, recommended, characteristics };
+// }
+
 function formatMetaData(metadata) {
-  // Initialize objects to store formatted data
-  const ratings = {};
-  const recommended = {};
-  const characteristics = {};
+  const formattedMetadata = {
+    ratings: {},
+    recommended: {},
+    characteristics: {},
+  };
 
-  // Format rating counts
   metadata.ratingCounts.forEach((item) => {
-    ratings[item.rating.toString()] = item.rating_count.toString();
+    if (item.rating !== undefined && item.rating_count !== undefined) {
+      formattedMetadata.ratings[item.rating.toString()] = item.rating_count.toString();
+    }
   });
 
-  // Format recommendation counts
   metadata.recommendCounts.forEach((item) => {
-    recommended[item.recommend.toString()] = item.recommend_count.toString();
+    if (item.recommend !== undefined && item.recommend_count !== undefined) {
+      formattedMetadata.recommended[item.recommend.toString()] = item.recommend_count.toString();
+    }
   });
 
-  // Format characteristic ratings
   metadata.avgCharacteristicRating.forEach((item) => {
-    characteristics[item.characteristic_name] = {
-      id: item.characteristic_id,
-      value: item.avg_characteristic_rating.toString()
-    };
+    if (
+      item.characteristic_name !== undefined &&
+      item.characteristic_id !== undefined &&
+      item.avg_characteristic_rating !== undefined
+    ) {
+      formattedMetadata.characteristics[item.characteristic_name] = {
+        id: item.characteristic_id,
+        value: item.avg_characteristic_rating.toString(),
+      };
+    }
   });
 
-  // Return the formatted data
-  return { ratings, recommended, characteristics };
+  return formattedMetadata;
 }
 
 exports.getMetaData = (req, res) => {
