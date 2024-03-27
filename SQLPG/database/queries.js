@@ -49,7 +49,9 @@ function getMetaData(productId) {
 
   const avgCharacteristicRatingQuery = `
     SELECT
-      *
+      characteristic_name,
+      characteristic_id,
+      avg_characteristic_rating
     FROM
       characteristic_avgratings
     WHERE
