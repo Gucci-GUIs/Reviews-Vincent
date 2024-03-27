@@ -49,20 +49,28 @@ function getMetaData(productId) {
 
   const avgCharacteristicRatingQuery = `
     SELECT
-      AVG(characteristics_reviews.value) AS avg_characteristic_rating,
-      characteristics.name AS characteristic_name,
-      characteristics.id AS characteristic_id
+      *
     FROM
-      reviews
-    LEFT JOIN
-      characteristics_reviews ON reviews.id = characteristics_reviews.review_id
-    LEFT JOIN
-      characteristics ON characteristics_reviews.characteristic_id = characteristics.id
+      characteristic_avgratings
     WHERE
-      reviews.product_id = $1
-    GROUP BY
-      characteristics.id,
-      characteristics.name`;
+      product_id = $1`;
+
+  // `
+  //   SELECT
+  //     AVG(characteristics_reviews.value) AS avg_characteristic_rating,
+  //     characteristics.name AS characteristic_name,
+  //     characteristics.id AS characteristic_id
+  //   FROM
+  //     reviews
+  //   LEFT JOIN
+  //     characteristics_reviews ON reviews.id = characteristics_reviews.review_id
+  //   LEFT JOIN
+  //     characteristics ON characteristics_reviews.characteristic_id = characteristics.id
+  //   WHERE
+  //     reviews.product_id = $1
+  //   GROUP BY
+  //     characteristics.id,
+  //     characteristics.name`;
 
   const params = [productId];
 
