@@ -1,4 +1,5 @@
-const { Pool } = require('pg');
+// const { Pool } = require('pg');
+const Pool = require('pg-pool');
 
 // console.log(process.env.POSTGRES_HOST);
 // console.log(process.env.POSTGRES_USER);
@@ -12,6 +13,9 @@ const connection = new Pool({
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   port: process.env.POSTGRES_PORT || 5432,
+  max: 20, //connections per pool
+  idleTimeoutMillis: 30000, //pg default is 10000ms
+  connectionTimeoutMillis: 2000, //pg default is 0
 
 });
 
