@@ -13,9 +13,9 @@ const connection = new Pool({
   password: process.env.POSTGRES_PASSWORD,
   database: process.env.POSTGRES_DB,
   port: process.env.POSTGRES_PORT || 5432,
-  max: 30, //connections per pool
+  max: 50, //connections per pool
   idleTimeoutMillis: 30000, //pg default is 10000ms
-  connectionTimeoutMillis: 1000, //pg default is 0
+  connectionTimeoutMillis: 2000, //pg default is 0
 
 });
 
