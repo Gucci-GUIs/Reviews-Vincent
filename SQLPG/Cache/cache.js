@@ -7,7 +7,7 @@ function cacheMiddleware(req, res, next) {
   const cachedData = cache.get(key);
 
   if (cachedData) {
-    console.log('Data found in cache');
+    // console.log('Data found in cache');
     return res.json(cachedData);
   }
 
